@@ -15,6 +15,8 @@ struct timePicker: View {
     @State private var minutesSelectionBack = 0
     @State private var secondsSelectionBack = 0
     
+    @Environment(\.colorScheme) var colorScheme
+    
     // For Parent View
 //    @Binding var isShow: Bool
 //    @Binding var isSave: Bool
@@ -73,7 +75,7 @@ struct timePicker: View {
                         .clipped()
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 30)
                 .frame(height: 250)
                 
                 Button {
@@ -95,9 +97,17 @@ struct timePicker: View {
                 .padding(.bottom, 20)
             }
             .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(.black.opacity(0.7), lineWidth: 1.5)
-                    .padding(.horizontal)
+                ZStack {
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.black.opacity(0.5))
+                        .padding(.horizontal, 30)
+                        .opacity(colorScheme == .dark ? 1 : 0)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(.black.opacity(0.7), lineWidth: 2)
+                        .padding(.horizontal, 30)
+                }
             )
         }
 //        .onAppear(perform: convertTime)
@@ -118,8 +128,3 @@ struct timePicker: View {
 //    }
 }
 
-struct timePicker_Previews: PreviewProvider {
-    static var previews: some View {
-        timePicker()
-    }
-}
